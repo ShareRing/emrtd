@@ -62,7 +62,7 @@ bytes are always kept.
 
 ## Installing
 
-Current release: **0.2.0**. The iOS frameworks are built with Xcode 26.6; build your
+Current release: **0.2.1**. The iOS frameworks are built with Xcode 26.6; build your
 app with that or newer.
 
 Minimums: Android `minSdk` 24, iOS 15. Every iOS app, React Native and Flutter ones included,
@@ -74,14 +74,14 @@ From Maven Central:
 
 ```kotlin
 dependencies {
-    implementation("network.sharering:emrtd-android:0.2.0")
+    implementation("network.sharering:emrtd-android:0.2.1")
 }
 ```
 
 ### iOS: Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/ShareRing/emrtd.git", from: "0.2.0")
+.package(url: "https://github.com/ShareRing/emrtd.git", from: "0.2.1")
 ```
 
 Then add the `EmrtdCore` product to your target.
@@ -91,7 +91,7 @@ Then add the `EmrtdCore` product to your target.
 `EmrtdCore` is not on CocoaPods trunk. Reference the podspec attached to the release:
 
 ```ruby
-pod 'EmrtdCore', :podspec => 'https://github.com/ShareRing/emrtd/releases/download/v0.2.0/EmrtdCore.podspec'
+pod 'EmrtdCore', :podspec => 'https://github.com/ShareRing/emrtd/releases/download/v0.2.1/EmrtdCore.podspec'
 ```
 
 React Native and Flutter both depend on `EmrtdCore`, so that line belongs in the host app's
@@ -419,7 +419,7 @@ extension DocumentImage { public var uiImage: UIImage? }   // Images.swift
 | Member | Behaviour |
 |---|---|
 | `init` | Does not throw. The reader (and `config.authorityCertificates`) is built at each `scan`. |
-| `scan` | Presents the NFC sheet (polling ISO 14443, plus PACE on iOS 26.4+), reads the first ISO 7816 tag and closes the sheet. Every failure is a `ReadError`. A second call while one runs throws `ReadError.InvalidArgument("A scan is already in progress")`. Retries up to twice, one second apart, when CoreNFC reports the system busy. `listener` is called on a background thread. |
+| `scan` | Presents the NFC sheet (polling ISO 14443, plus PACE on iOS 26.4+), reads the first ISO 7816 tag and closes the sheet. Every failure is a `ReadError`. A second call while one runs throws `ReadError.InvalidArgument("A scan is already in progress")`. Retries up to five times, one second apart and then slightly longer, when CoreNFC reports the system busy. Returns only after the NFC session has closed, so an immediate retry does not queue behind it. `listener` is called on a background thread. |
 | `cancel` | Ends the scan in progress with `ReadError.Cancelled`. Cancelling the calling `Task` does the same. |
 | `ScanMessages.holdNear` | Sheet text while waiting for a tag. |
 | `ScanMessages.readingProgress` | `String(format:)` pattern; `%1$d` is the total progress 0-100, `%2$@` the file being read (`DG2`). |

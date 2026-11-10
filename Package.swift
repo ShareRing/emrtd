@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "EmrtdCore", targets: ["EmrtdCore", "emrtdFFI"])
     ],
     targets: [
-        .binaryTarget(name: "EmrtdCore", url: "https://github.com/ShareRing/emrtd/releases/download/v0.2.0/EmrtdCore.xcframework.zip", checksum: "463e8095b7bca9cf6f92c666632c8c0e7a5ba54e1eda356d585ed97c2933baf0"),
-        .binaryTarget(name: "emrtdFFI", url: "https://github.com/ShareRing/emrtd/releases/download/v0.2.0/emrtdFFI.zip", checksum: "0cdf034b4959e9f19027e5e12d2bab8468b05621444b5bf54657793318102f4d"),
+        .binaryTarget(name: "EmrtdCore", url: "https://github.com/ShareRing/emrtd/releases/download/v0.2.1/EmrtdCore.xcframework.zip", checksum: "39c03b10a1b8b86d132a4cbf79725f083c44158daae1e824feac29fc02ccb821"),
+        .binaryTarget(name: "emrtdFFI", url: "https://github.com/ShareRing/emrtd/releases/download/v0.2.1/emrtdFFI.zip", checksum: "b226f6171078378e7b39898c6b8d2471005b75fbe1d781e535ac2b5eb20aed91"),
     ]
 )
