@@ -62,7 +62,7 @@ bytes are always kept.
 
 ## Installing
 
-Current release: **0.2.1**. The iOS frameworks are built with Xcode 26.6; build your
+Current release: **0.2.2**. The iOS frameworks are built with Xcode 26.6; build your
 app with that or newer.
 
 Minimums: Android `minSdk` 24, iOS 15. Every iOS app, React Native and Flutter ones included,
@@ -74,14 +74,14 @@ From Maven Central:
 
 ```kotlin
 dependencies {
-    implementation("network.sharering:emrtd-android:0.2.1")
+    implementation("network.sharering:emrtd-android:0.2.2")
 }
 ```
 
 ### iOS: Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/ShareRing/emrtd.git", from: "0.2.1")
+.package(url: "https://github.com/ShareRing/emrtd.git", from: "0.2.2")
 ```
 
 Then add the `EmrtdCore` product to your target.
@@ -91,7 +91,7 @@ Then add the `EmrtdCore` product to your target.
 `EmrtdCore` is not on CocoaPods trunk. Reference the podspec attached to the release:
 
 ```ruby
-pod 'EmrtdCore', :podspec => 'https://github.com/ShareRing/emrtd/releases/download/v0.2.1/EmrtdCore.podspec'
+pod 'EmrtdCore', :podspec => 'https://github.com/ShareRing/emrtd/releases/download/v0.2.2/EmrtdCore.podspec'
 ```
 
 React Native and Flutter both depend on `EmrtdCore`, so that line belongs in the host app's
@@ -1019,7 +1019,7 @@ Kotlin `ReadException`, Swift `ReadError`.
 | `NotConnected` | `reason: String`, `debugInfo: DebugInfo` | The tag left the field, a command timed out, an I/O error, or the session ended (iOS session timeout, connect failure). |
 | `Read` | `kind: ReadErrorKind`, `reason: String`, `debugInfo: DebugInfo` | The chip answered, but reading or parsing failed: mandatory DG1/DG2 denied or missing, EF.COM or DG1 unparseable, a secure messaging error while reading, or an unexpected transport error (`kind = unknown`). |
 | `Cancelled` | `debugInfo: DebugInfo` | `cancel()` was called, the user dismissed the iOS NFC sheet or the Android scan sheet (Cancel, Back), or the calling coroutine/task was cancelled (iOS; on Android coroutine cancellation throws `CancellationException`). |
-| `NfcUnavailable` | `reason: String` | Android: the device has no NFC or it is off. iOS: NFC reading is not available, or the app lacks the NFC entitlement / Info.plist entries (CoreNFC security violation). |
+| `NfcUnavailable` | `reason: String` | Android: the device has no NFC or it is off. iOS: NFC reading is not available, the app lacks the NFC entitlement / Info.plist entries (CoreNFC security violation), or Core NFC stayed busy with another session (error 203) through every retry. |
 
 Per-platform codes:
 
