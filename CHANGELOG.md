@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- fix an issue with nfc session by single scan limitation across app instances
+
 ## 0.2.2
 
 - enhance NFC error handling to include system busy state
